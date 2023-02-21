@@ -2,19 +2,42 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
-const axios = require('axios');
 
 const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
+  id: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    defaultValue: Sequelize.UUIDV4,
+  },
   username: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
     unique: true,
-    allowNull: false
   },
   password: {
     type: Sequelize.STRING,
-  }
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  bio: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+  },
 })
 
 module.exports = User
@@ -29,6 +52,16 @@ User.prototype.correctPassword = function(candidatePwd) {
 
 User.prototype.generateToken = function() {
   return jwt.sign({id: this.id}, process.env.JWT)
+}
+
+User.prototype.getEntries = async function() {
+  let entries = await db.models.entry.findAll({
+    where: {
+      userId: this.id,
+    },
+  });
+
+  return entries;
 }
 
 /**
