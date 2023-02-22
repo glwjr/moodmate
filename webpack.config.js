@@ -1,10 +1,10 @@
 module.exports = {
   entry: [
-    './client/index.js'
+    './client/index.js',
   ],
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './public/bundle.js',
   },
   devtool: 'source-map',
   module: {
@@ -15,10 +15,10 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            '@babel/preset-react'
-          ]
-        }
-      }
-    ]
-  }
-}
+            '@babel/preset-react',
+          ],
+        },
+      },
+    ],
+  },
+};
