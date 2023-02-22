@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEntries } from "../store";
+import EntryForm from "./EntryForm";
 
 export default function Entries() {
   const dispatch = useDispatch();
@@ -11,8 +12,11 @@ export default function Entries() {
   }, []);
 
   return (
-    <pre>
-      {JSON.stringify(entries, null, 2)}
-    </pre>
+    <>
+      <pre>
+        {JSON.stringify(entries, null, 2)}
+      </pre>
+      <EntryForm />
+    </>
   )
 }
