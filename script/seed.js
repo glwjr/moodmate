@@ -24,14 +24,14 @@ async function seed() {
   ]);
 
   const [great, good, meh, bad, sad, anxious, irritated, awful] = await Promise.all([
-    Mood.create({ mood: 'Great' }),
-    Mood.create({ mood: 'Good' }),
-    Mood.create({ mood: 'Meh' }),
-    Mood.create({ mood: 'Bad' }),
-    Mood.create({ mood: 'Sad' }),
-    Mood.create({ mood: 'Anxious' }),
-    Mood.create({ mood: 'Irritated' }),
-    Mood.create({ mood: 'Awful' }),
+    Mood.create({ mood: 'Great', userId: gary.id }),
+    Mood.create({ mood: 'Good', userId: gary.id }),
+    Mood.create({ mood: 'Meh', userId: gary.id }),
+    Mood.create({ mood: 'Bad', userId: gary.id }),
+    Mood.create({ mood: 'Sad', userId: gary.id }),
+    Mood.create({ mood: 'Anxious', userId: gary.id }),
+    Mood.create({ mood: 'Irritated', userId: gary.id }),
+    Mood.create({ mood: 'Awful', userId: gary.id }),
   ]);
 
   console.log('seeded successfully');
