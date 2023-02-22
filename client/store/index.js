@@ -3,11 +3,13 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import auth from './auth';
 import entries from './entries';
+import moods from './moods';
 
-const reducer = combineReducers({ auth, entries });
+const reducer = combineReducers({ auth, entries, moods });
 const middleware = applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }));
 const store = createStore(reducer, middleware);
 
 export default store;
 export * from './auth';
 export * from './entries';
+export * from './moods';

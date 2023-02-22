@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const allEntries = (state = [], action) => {
+const allEntries = (state = {}, action) => {
   if (action.type === 'SET_ENTRIES') {
     return action.allEntries;
   }

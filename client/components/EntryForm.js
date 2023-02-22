@@ -1,14 +1,19 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addEntry } from '../store';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addEntry, fetchMoods } from '../store';
 
 export default function EntryForm() {
   const dispatch = useDispatch();
+  const { moods } = useSelector((state) => state);
   const [entry, setEntry] = useState({
     text: '',
     mood: '',
   });
+
+  useEffect(() => {
+    dispatch(fetchMoods());
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +35,18 @@ export default function EntryForm() {
           name="text"
           onChange={onChange}
         />
+        <select
+          name="mood"
+          value={entry.mood}
+          onChange={onChange}
+        >
+          <option key="none" disabled value="">Select a Mood</option>
+          {moods.map((mood) => (
+            <option key={mood.id} value={mood.mood}>
+              {mood.mood}
+            </option>
+          ))}
+        </select>
         <button type="submit">Submit Entry</button>
       </form>
     </div>
