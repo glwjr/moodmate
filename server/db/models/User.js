@@ -64,6 +64,34 @@ User.prototype.getEntries = async function() {
   return entries;
 }
 
+User.prototype.addEntry = async function(entry) {
+  const newEntry = await db.models.entry.create({
+    text: entry.text,
+    mood: entry.mood,
+    userId: this.id,
+  });
+
+  return newEntry;
+}
+
+User.prototype.getMoods = async function() {
+  let moods = await db.models.mood.findAll({
+    where: {
+      userId: this.id,
+    },
+  });
+
+  return moods;
+}
+
+User.prototype.addMood = async function(mood) {
+  const newMood = await db.models.mood.create({
+    mood
+  });
+
+  return newMood;
+}
+
 /**
  * classMethods
  */

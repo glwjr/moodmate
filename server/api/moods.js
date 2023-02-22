@@ -5,7 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.getEntries());
+    res.send(await user.getMoods());
   } catch (err) {
     next(err);
   }
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.addEntry(req.body));
+    res.send(await user.addMood(req.body));
   } catch (err) {
     next(err);
   }
