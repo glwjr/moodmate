@@ -1,10 +1,16 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
-function Navbar({ handleClick, isLoggedIn }) {
+function Navbar() {
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const isLoggedIn = !!auth.id;
+
+  const handleClick = () => dispatch(logout());
+
   return (
     <div>
       <h1>MoodMate</h1>
@@ -31,17 +37,4 @@ function Navbar({ handleClick, isLoggedIn }) {
   );
 }
 
-/**
- * CONTAINER
- */
-const mapState = (state) => ({
-  isLoggedIn: !!state.auth.id,
-});
-
-const mapDispatch = (dispatch) => ({
-  handleClick() {
-    dispatch(logout());
-  },
-});
-
-export default connect(mapState, mapDispatch)(Navbar);
+export default Navbar;
