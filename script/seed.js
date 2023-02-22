@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Entry} } = require('../server/db')
+const {db, models: {User, Entry, Mood} } = require('../server/db');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,12 +12,23 @@ async function seed() {
 
   // Creating Users
   const [gary, mysia] = await Promise.all([
-    User.create({ username: 'gary', password: '123', firstName: 'Gary', lastName: 'White' }),
-    User.create({ username: 'mysia', password: '123', firstName: 'Mysia', lastName: 'Anderson' }),
+    User.create({ username: 'gary', firstName: 'Gary', lastName: 'White', password: '123', firstName: 'Gary', lastName: 'White' }),
+    User.create({ username: 'mysia', firstName: 'Mysia', lastName: 'Anderson', password: '123', firstName: 'Mysia', lastName: 'Anderson' }),
   ]);
 
   const entries = await Promise.all([
-    Entry.create({ entry: 'Today was a rough day.', mood: 'Meh', userId: gary.id })
+    Entry.create({ text: 'Today was a rough day.', mood: 'Meh', userId: gary.id }),
+  ]);
+
+  const [great, good, meh, bad, sad, anxious, irritated, awful] = await Promise.all([
+    Mood.create({ mood: 'Great' }),
+    Mood.create({ mood: 'Good' }),
+    Mood.create({ mood: 'Meh' }),
+    Mood.create({ mood: 'Bad' }),
+    Mood.create({ mood: 'Sad' }),
+    Mood.create({ mood: 'Anxious' }),
+    Mood.create({ mood: 'Irritated' }),
+    Mood.create({ mood: 'Awful' }),
   ]);
 
   console.log(`seeded successfully`)
@@ -25,6 +36,16 @@ async function seed() {
     users: {
       gary,
       mysia
+    },
+    moods: {
+      great,
+      good,
+      meh,
+      bad,
+      sad,
+      anxious,
+      irritated,
+      awful
     },
     entries,
   }
