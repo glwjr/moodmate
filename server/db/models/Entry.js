@@ -15,6 +15,10 @@ const Entry = db.define('entry', {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  activities: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
+  },
   userId: {
     type: Sequelize.UUID,
     allowNull: false,

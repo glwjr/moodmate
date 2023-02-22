@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
-const { db, models: { User, Entry, Mood } } = require('../server/db');
+const {
+  db, models: {
+    User, Entry, Mood, Activity,
+  },
+} = require('../server/db');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -19,19 +23,32 @@ async function seed() {
     }),
   ]);
 
-  const entries = await Promise.all([
-    Entry.create({ text: 'Today was a rough day.', mood: 'Meh', userId: gary.id }),
+  const [great, good, meh, bad, sad, anxious, irritated, awful] = await Promise.all([
+    Mood.create({ name: 'Great', userId: gary.id }),
+    Mood.create({ name: 'Good', userId: gary.id }),
+    Mood.create({ name: 'Meh', userId: gary.id }),
+    Mood.create({ name: 'Bad', userId: gary.id }),
+    Mood.create({ name: 'Sad', userId: gary.id }),
+    Mood.create({ name: 'Anxious', userId: gary.id }),
+    Mood.create({ name: 'Irritated', userId: gary.id }),
+    Mood.create({ name: 'Awful', userId: gary.id }),
   ]);
 
-  const [great, good, meh, bad, sad, anxious, irritated, awful] = await Promise.all([
-    Mood.create({ mood: 'Great', userId: gary.id }),
-    Mood.create({ mood: 'Good', userId: gary.id }),
-    Mood.create({ mood: 'Meh', userId: gary.id }),
-    Mood.create({ mood: 'Bad', userId: gary.id }),
-    Mood.create({ mood: 'Sad', userId: gary.id }),
-    Mood.create({ mood: 'Anxious', userId: gary.id }),
-    Mood.create({ mood: 'Irritated', userId: gary.id }),
-    Mood.create({ mood: 'Awful', userId: gary.id }),
+  const [work, relax, family, friends, date] = await Promise.all([
+    Activity.create({ name: 'Work', userId: gary.id }),
+    Activity.create({ name: 'Relax', userId: gary.id }),
+    Activity.create({ name: 'Family', userId: gary.id }),
+    Activity.create({ name: 'Friends', userId: gary.id }),
+    Activity.create({ name: 'Date', userId: gary.id }),
+  ]);
+
+  const [entryOne, entryTwo] = await Promise.all([
+    Entry.create({
+      text: 'Today was a rough day.', mood: meh.name, activities: [work.name, family.name], userId: gary.id,
+    }),
+    Entry.create({
+      text: 'Today was a great day!', mood: great.name, activities: [work.name, date.name, friends.name], userId: gary.id,
+    }),
   ]);
 
   console.log('seeded successfully');
@@ -51,7 +68,17 @@ async function seed() {
       irritated,
       awful,
     },
-    entries,
+    activities: {
+      work,
+      relax,
+      family,
+      friends,
+      date,
+    },
+    entries: {
+      entryOne,
+      entryTwo,
+    },
   };
 }
 

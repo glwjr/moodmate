@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Mood = db.define('mood', {
+const Activity = db.define('activity', {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -17,4 +17,4 @@ const Mood = db.define('mood', {
   },
 });
 
-module.exports = Mood;
+module.exports = Activity;

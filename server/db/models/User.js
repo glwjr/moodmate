@@ -86,6 +86,21 @@ User.prototype.addMood = async function (mood) {
   return newMood;
 };
 
+User.prototype.getActivities = async function () {
+  const activities = await db.models.activity.findAll({
+    where: {
+      userId: this.id,
+    },
+  });
+
+  return activities;
+};
+
+User.prototype.addActivity = async function (activity) {
+  const newActivity = await db.models.activity.create({ activity });
+  return newActivity;
+};
+
 /**
  * classMethods
  */
