@@ -1,15 +1,15 @@
-import React from 'react'
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react';
+import Navbar from './components/Navbar';
+import Routes from './Routes';
 
-import Navbar from './components/Navbar'
-import Routes from './Routes'
-
-const App = () => {
+function App() {
   return (
     <div>
       <Navbar />
       <Routes />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
