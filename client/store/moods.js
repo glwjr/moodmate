@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// eslint-disable-next-line default-param-last
 const moods = (state = [], action) => {
   if (action.type === 'SET_MOODS') {
     return action.moods;
