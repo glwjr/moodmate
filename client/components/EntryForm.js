@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addEntry } from "../store";
+/* eslint-disable react/jsx-filename-extension */
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addEntry } from '../store';
 
 export default function EntryForm() {
   const dispatch = useDispatch();
   const [entry, setEntry] = useState({
     text: '',
-    mood: ''
+    mood: '',
   });
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setEntry({ ...entry, [name]: value });
-  }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(addEntry(entry));
     setEntry({ text: '', mood: '' });
-  }
+  };
 
   return (
     <div>
@@ -32,5 +33,5 @@ export default function EntryForm() {
         <button type="submit">Submit Entry</button>
       </form>
     </div>
-  )
+  );
 }

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchEntries } from "../store";
-import EntryForm from "./EntryForm";
+/* eslint-disable react/jsx-filename-extension */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEntries } from '../store';
+import EntryForm from './EntryForm';
 
 export default function Entries() {
   const dispatch = useDispatch();
@@ -18,5 +19,5 @@ export default function Entries() {
       </pre>
       <EntryForm />
     </>
-  )
+  );
 }
