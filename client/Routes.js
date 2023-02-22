@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  withRouter, Route, Switch, Redirect,
-} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Entries from './components/Entries';
 import Home from './components/Home';
@@ -12,49 +10,33 @@ import { me } from './store';
 /**
  * COMPONENT
  */
-class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData();
-  }
+function Routes() {
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state) => state);
+  const loadInitialData = () => dispatch(me());
+  const isLoggedIn = !!auth.id;
 
-  render() {
-    const { isLoggedIn } = this.props;
+  useEffect(() => {
+    loadInitialData();
+  }, []);
 
-    return (
-      <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/entries" component={Entries} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {isLoggedIn ? (
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/entries" component={Entries} />
+          <Redirect to="/home" />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+        </Switch>
+      )}
+    </div>
+  );
 }
 
-/**
- * CONTAINER
- */
-const mapState = (state) => ({
-  // Being 'logged in' for our purposes will be defined as having a state.auth that has a truthy id.
-  // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-  isLoggedIn: !!state.auth.id,
-});
-
-const mapDispatch = (dispatch) => ({
-  loadInitialData() {
-    dispatch(me());
-  },
-});
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes));
+export default Routes;
