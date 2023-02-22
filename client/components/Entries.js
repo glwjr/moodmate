@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEntries } from '../store';
 import EntryForm from './EntryForm';
 
-export default function Entries() {
+function Entries() {
   const dispatch = useDispatch();
   const { entries } = useSelector((state) => state);
 
@@ -14,10 +14,26 @@ export default function Entries() {
 
   return (
     <>
-      <pre>
+      {/* <pre>
         {JSON.stringify(entries, null, 2)}
-      </pre>
+      </pre> */}
+      <ul>
+        {entries.map((entry) => (
+          <li key={entry.id}>
+            {entry.text}
+            <ul>
+              <li>
+                Mood:
+                {' '}
+                {entry.mood}
+              </li>
+            </ul>
+          </li>
+        ))}
+      </ul>
       <EntryForm />
     </>
   );
 }
+
+export default Entries;

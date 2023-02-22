@@ -1,29 +1,19 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-/**
- * COMPONENT
- */
-export function Home(props) {
-  const { firstName } = props;
+function Home() {
+  const { auth } = useSelector((state) => state);
 
   return (
     <div>
       <h3>
         Welcome,
-        {firstName}
+        {auth.firstName}
         !
       </h3>
     </div>
   );
 }
 
-/**
- * CONTAINER
- */
-const mapState = (state) => ({
-  firstName: state.auth.firstName,
-});
-
-export default connect(mapState)(Home);
+export default Home;

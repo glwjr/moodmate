@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEntry, fetchMoods } from '../store';
 
-export default function EntryForm() {
+function EntryForm() {
   const dispatch = useDispatch();
   const { moods } = useSelector((state) => state);
   const [entry, setEntry] = useState({
@@ -40,7 +40,7 @@ export default function EntryForm() {
           value={entry.mood}
           onChange={onChange}
         >
-          <option key="none" disabled value="">Select a Mood</option>
+          <option key="none" value="">No Mood Selected</option>
           {moods.map((mood) => (
             <option key={mood.id} value={mood.mood}>
               {mood.mood}
@@ -52,3 +52,5 @@ export default function EntryForm() {
     </div>
   );
 }
+
+export default EntryForm;
