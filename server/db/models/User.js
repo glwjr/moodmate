@@ -75,7 +75,7 @@ User.prototype.addEntry = async function (entry) {
 User.prototype.getMoods = async function () {
   const moods = await db.models.mood.findAll({
     where: {
-      userId: this.id,
+      [Sequelize.Op.or]: [{ userId: this.id }, { userId: null }],
     },
   });
 

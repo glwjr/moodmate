@@ -13,7 +13,6 @@ const Mood = db.define('mood', {
   },
   userId: {
     type: Sequelize.UUID,
-    allowNull: false,
   },
 });
 
