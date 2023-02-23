@@ -22,13 +22,25 @@ export const me = () => async (dispatch) => {
   }
 };
 
-export const authenticate = (username, password, method) => async (dispatch) => {
+export const login = (username, password) => async (dispatch) => {
   try {
-    const res = await axios.post(`/auth/${method}`, { username, password });
+    const res = await axios.post('/auth/login', { username, password });
     window.localStorage.setItem('token', res.data.token);
     dispatch(me());
   } catch (authError) {
-    return dispatch({ type: 'SET_AUTH', auth: { error: authError } });
+    return dispatch({ type: 'SET_AUTH', auth: { error: { ...authError, displayedMessage: 'Error logging in. Please double-check your credentials.' } } });
+  }
+};
+
+export const signUp = (username, password, firstName, lastName) => async (dispatch) => {
+  try {
+    const res = await axios.post('/auth/signup', {
+      username, password, firstName, lastName,
+    });
+    window.localStorage.setItem('token', res.data.token);
+    dispatch(me());
+  } catch (authError) {
+    return dispatch({ type: 'SET_AUTH', auth: { error: { ...authError, displayedMessage: 'Error signing up. Please double-check your inputs.' } } });
   }
 };
 
