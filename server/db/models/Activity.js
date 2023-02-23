@@ -13,7 +13,6 @@ const Activity = db.define('activity', {
   },
   userId: {
     type: Sequelize.UUID,
-    allowNull: false,
   },
 });
 
