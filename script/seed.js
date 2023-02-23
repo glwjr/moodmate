@@ -34,12 +34,16 @@ async function seed() {
     Mood.create({ name: 'Awful', userId: gary.id }),
   ]);
 
-  const [work, relax, family, friends, date] = await Promise.all([
-    Activity.create({ name: 'Work', userId: gary.id }),
-    Activity.create({ name: 'Relax', userId: gary.id }),
-    Activity.create({ name: 'Family', userId: gary.id }),
-    Activity.create({ name: 'Friends', userId: gary.id }),
-    Activity.create({ name: 'Date', userId: gary.id }),
+  const [work, relax, family, friends, date, sport, party, movies, gaming] = await Promise.all([
+    Activity.create({ name: 'Work', userId: null }),
+    Activity.create({ name: 'Relax', userId: null }),
+    Activity.create({ name: 'Family', userId: null }),
+    Activity.create({ name: 'Friends', userId: null }),
+    Activity.create({ name: 'Date', userId: null }),
+    Activity.create({ name: 'Sport', userId: null }),
+    Activity.create({ name: 'Party', userId: null }),
+    Activity.create({ name: 'Movies', userId: null }),
+    Activity.create({ name: 'Gaming', userId: null }),
   ]);
 
   const [entryOne, entryTwo] = await Promise.all([
@@ -74,6 +78,10 @@ async function seed() {
       family,
       friends,
       date,
+      sport,
+      party,
+      movies,
+      gaming,
     },
     entries: {
       entryOne,
