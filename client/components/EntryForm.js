@@ -44,7 +44,7 @@ function EntryForm() {
   };
 
   return (
-    <Box sx={{ minWidth: 200 }}>
+    <Box>
       <form onSubmit={onSubmit}>
         <FormControl fullWidth>
           <InputLabel id="mood-label">How are you?</InputLabel>
@@ -63,6 +63,7 @@ function EntryForm() {
               ))}
             </Select>
             <ToggleButtonGroup
+              size="small"
               value={entry.activities}
               onChange={handleActivities}
               aria-label="Activity"
