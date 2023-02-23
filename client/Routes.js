@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
-import Entries from './components/Entries';
 import Home from './components/Home';
+import Entries from './components/Entries';
+import Settings from './components/Settings';
 import { me } from './store';
 
 /**
@@ -26,6 +27,7 @@ function Routes() {
         <Switch>
           <Route path="/home" component={Home} />
           <Route path="/entries" component={Entries} />
+          <Route path="/settings" component={Settings} />
           <Redirect to="/home" />
         </Switch>
       ) : (
@@ -33,6 +35,7 @@ function Routes() {
           <Route path="/" exact component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/*" exact component={Login} />
         </Switch>
       )}
     </div>
