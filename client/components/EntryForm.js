@@ -19,7 +19,7 @@ function EntryForm() {
   const { moods, activities } = useSelector((state) => state);
   const [entry, setEntry] = React.useState({
     mood: '',
-    text: '',
+    note: '',
     activities: [],
   });
 
@@ -36,7 +36,7 @@ function EntryForm() {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(addEntry(entry));
-    setEntry({ mood: '', text: '', activities: [] });
+    setEntry({ mood: '', note: '', activities: [] });
   };
 
   const handleActivities = (event, selectedActivities) => {
@@ -81,8 +81,8 @@ function EntryForm() {
               id="entry-note"
               label="Add a note"
               variant="outlined"
-              value={entry.text}
-              name="text"
+              value={entry.note}
+              name="note"
               onChange={onChange}
             />
             <Button variant="contained" type="submit">Submit</Button>

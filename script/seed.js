@@ -48,10 +48,10 @@ async function seed() {
 
   const [entryOne, entryTwo] = await Promise.all([
     Entry.create({
-      text: 'Today was a rough day.', mood: meh.name, activities: [work.name, family.name], userId: gary.id,
+      note: 'Today was a rough day.', mood: meh.name, activities: [work.name, family.name], userId: gary.id,
     }),
     Entry.create({
-      text: 'Today was a great day!', mood: great.name, activities: [work.name, date.name, friends.name], userId: gary.id,
+      note: 'Today was a great day!', mood: great.name, activities: [work.name, date.name, friends.name], userId: gary.id,
     }),
   ]);
 

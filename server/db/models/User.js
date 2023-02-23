@@ -63,7 +63,7 @@ User.prototype.getEntries = async function () {
 
 User.prototype.addEntry = async function (entry) {
   const newEntry = await db.models.entry.create({
-    text: entry.text,
+    note: entry.note,
     mood: entry.mood,
     activities: entry.activities,
     userId: this.id,

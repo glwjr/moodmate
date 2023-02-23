@@ -7,7 +7,7 @@ const Entry = db.define('entry', {
     primaryKey: true,
     defaultValue: Sequelize.UUIDV4,
   },
-  text: {
+  note: {
     type: Sequelize.TEXT,
     allowNull: false,
   },
