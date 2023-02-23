@@ -3,10 +3,10 @@ import axios from 'axios';
 // eslint-disable-next-line default-param-last
 const allEntries = (state = [], action) => {
   if (action.type === 'SET_ENTRIES') {
-    return action.allEntries.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    return action.allEntries.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
   if (action.type === 'ADD_ENTRY') {
-    return [...state, action.entry].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    return [...state, action.entry].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
   return state;
 };
