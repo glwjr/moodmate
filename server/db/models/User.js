@@ -65,6 +65,7 @@ User.prototype.addEntry = async function (entry) {
   const newEntry = await db.models.entry.create({
     text: entry.text,
     mood: entry.mood,
+    activities: entry.activities,
     userId: this.id,
   });
 
@@ -89,7 +90,7 @@ User.prototype.addMood = async function (mood) {
 User.prototype.getActivities = async function () {
   const activities = await db.models.activity.findAll({
     where: {
-      userId: this.id,
+      [Sequelize.Op.or]: [{ userId: this.id }, { userId: null }],
     },
   });
 
