@@ -10,6 +10,9 @@ const Entry = db.define('entry', {
   note: {
     type: Sequelize.TEXT,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
   mood: {
     type: Sequelize.STRING,
@@ -22,6 +25,9 @@ const Entry = db.define('entry', {
   userId: {
     type: Sequelize.UUID,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
 });
 

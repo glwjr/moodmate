@@ -10,9 +10,13 @@ const Mood = db.define('mood', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
   userId: {
     type: Sequelize.UUID,
+    allowNull: true,
   },
 });
 

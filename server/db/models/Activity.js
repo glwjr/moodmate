@@ -10,9 +10,13 @@ const Activity = db.define('activity', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
   userId: {
     type: Sequelize.UUID,
+    allowNull: true,
   },
 });
 
