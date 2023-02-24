@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
-import { fetchEntries } from '../store';
+import { fetchEntries, removeEntry } from '../store';
 import EntryForm from './EntryForm';
 
 function Entries() {
@@ -34,15 +34,15 @@ function Entries() {
       <Grid>
         <EntryForm />
       </Grid>
-      <Grid xs={12} display="flex" flexDirection="column" alignItems="center">
+      <Grid sx={{ mt: 2 }} xs={12} display="flex" flexDirection="column" alignItems="center">
         {entries.map((entry) => (
           <Box
             key={entry.id}
             sx={{
               width: '100%',
-              maxWidth: 550,
+              maxWidth: 564,
               border: '1px solid lightgrey',
-              borderRadius: 5,
+              borderRadius: 2,
               mb: 4,
             }}
           >
@@ -50,7 +50,7 @@ function Entries() {
               <Typography gutterBottom variant="h6" component="div">
                 {moment(entry.createdAt).format('dddd, MMMM Do, YYYY, h:mm a')}
               </Typography>
-              <Typography gutterBottom variant="h7" component="div">
+              <Typography gutterBottom variant="h6" fontWeight="bold" component="div">
                 {entry.mood}
               </Typography>
               <Typography color="text.primary" variant="body2">
@@ -59,7 +59,7 @@ function Entries() {
             </Box>
             <Divider variant="middle" />
             <Box sx={{ m: 2 }}>
-              <Typography gutterBottom variant="body1" textAlign="center">
+              <Typography variant="body2" textAlign="center" sx={{ mb: 1, textDecoration: 'underline', textTransform: 'uppercase' }}>
                 Activities
               </Typography>
               <Stack flexWrap="wrap" direction="row" justifyContent="center" spacing={1}>
@@ -68,9 +68,9 @@ function Entries() {
                 ))}
               </Stack>
             </Box>
-            <Box sx={{ m: 3, mt: 0, mb: 2 }} textAlign="right">
+            <Box sx={{ mr: 3, mt: 0, mb: 2 }} textAlign="right">
               <Button size="small">Edit</Button>
-              <Button size="small">Delete</Button>
+              <Button onClick={() => dispatch(removeEntry(entry))} size="small">Delete</Button>
             </Box>
           </Box>
         ))}

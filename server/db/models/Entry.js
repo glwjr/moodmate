@@ -9,10 +9,7 @@ const Entry = db.define('entry', {
   },
   note: {
     type: Sequelize.TEXT,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    allowNull: true,
   },
   mood: {
     type: Sequelize.STRING,

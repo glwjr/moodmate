@@ -72,6 +72,12 @@ User.prototype.addEntry = async function (entry) {
   return newEntry;
 };
 
+User.prototype.removeEntry = async function (entry) {
+  const entryToBeRemoved = await db.models.entry.findByPk(entry.id);
+  await entryToBeRemoved.destroy();
+  return this.getEntries();
+};
+
 User.prototype.getMoods = async function () {
   const moods = await db.models.mood.findAll({
     where: {
