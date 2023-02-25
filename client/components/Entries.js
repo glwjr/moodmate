@@ -28,10 +28,10 @@ function Entries() {
       direction="column"
       alignItems="center"
       justify="center"
-      style={{ minHeight: '100vh', minWidth: 700 }}
+      style={{ minHeight: '100vh' }}
       spacing={4}
     >
-      <Grid>
+      <Grid xs={12}>
         <EntryForm />
       </Grid>
       <Grid sx={{ mt: 2 }} xs={12} display="flex" flexDirection="column" alignItems="center">
@@ -40,7 +40,6 @@ function Entries() {
             key={entry.id}
             sx={{
               width: '100%',
-              maxWidth: 564,
               border: '1px solid lightgrey',
               borderRadius: 2,
               mb: 4,

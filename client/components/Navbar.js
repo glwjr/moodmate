@@ -44,7 +44,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ minWidth: 800 }}>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MoodIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

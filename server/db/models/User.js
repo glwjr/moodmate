@@ -108,6 +108,16 @@ User.prototype.addActivity = async function (activity) {
   return newActivity;
 };
 
+User.prototype.getMoodCount = async function (moodName) {
+  const entries = await db.models.entry.findAndCountAll({
+    where: {
+      [Sequelize.Op.and]: [{ userId: this.id }, { mood: moodName }],
+    },
+  });
+  const moodCount = entries.count;
+  return moodCount;
+};
+
 /**
  * classMethods
  */

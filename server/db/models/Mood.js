@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const Sequelize = require('sequelize');
 const db = require('../db');
 

@@ -6,9 +6,10 @@ import auth from './auth';
 import entries from './entries';
 import moods from './moods';
 import activities from './activities';
+import data from './data';
 
 const reducer = combineReducers({
-  auth, entries, moods, activities,
+  auth, entries, moods, activities, data,
 });
 const middleware = applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }));
 const store = createStore(reducer, middleware);
@@ -18,3 +19,4 @@ export * from './auth';
 export * from './entries';
 export * from './moods';
 export * from './activities';
+export * from './data';

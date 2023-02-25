@@ -62,7 +62,7 @@ function EntryForm() {
                 </MenuItem>
               ))}
             </Select>
-            <ToggleButtonGroup
+            {/* <ToggleButtonGroup
               size="small"
               value={entry.activities}
               onChange={handleActivities}
@@ -77,7 +77,7 @@ function EntryForm() {
                   {activity.name}
                 </ToggleButton>
               ))}
-            </ToggleButtonGroup>
+            </ToggleButtonGroup> */}
             <TextField
               id="entry-note"
               label="Add a note"

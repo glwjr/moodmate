@@ -23,7 +23,7 @@ function Home() {
           {auth.firstName}
           &apos;s Mood Chart
         </Typography>
-        <Grid minWidth={500}>
+        <Grid>
           <MoodChart />
         </Grid>
       </Grid>
