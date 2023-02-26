@@ -6,7 +6,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
@@ -45,8 +44,8 @@ function Entries() {
               mb: 4,
             }}
           >
-            <Box sx={{ m: 3 }} textAlign="center">
-              <Typography gutterBottom variant="h6" component="div">
+            <Box sx={{ mt: 3, mb: 2 }} textAlign="center">
+              <Typography gutterBottom variant="body" component="div">
                 {moment(entry.createdAt).format('dddd, MMMM Do, YYYY, h:mm a')}
               </Typography>
               <Typography gutterBottom variant="h6" fontWeight="bold" component="div">
@@ -57,17 +56,24 @@ function Entries() {
               </Typography>
             </Box>
             <Divider variant="middle" />
-            <Box sx={{ m: 2 }}>
-              <Typography variant="body2" textAlign="center" sx={{ mb: 1, textDecoration: 'underline', textTransform: 'uppercase' }}>
-                Activities
-              </Typography>
-              <Stack flexWrap="wrap" direction="row" justifyContent="center" spacing={1}>
-                {entry.activities.map((activity) => (
-                  <Chip key={activity} color="primary" label={activity} sx={{ mb: 1 }} />
-                ))}
-              </Stack>
-            </Box>
-            <Box sx={{ mr: 3, mt: 0, mb: 2 }} textAlign="right">
+            {entry.activities?.length > 0 ? (
+              <Box sx={{ m: 2 }}>
+                <Typography variant="body2" textAlign="center" sx={{ mb: 1, textDecoration: 'underline', textTransform: 'uppercase' }}>
+                  Activities
+                </Typography>
+                <Box
+                  sx={{
+                    display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center',
+                  }}
+                  spacing={1}
+                >
+                  {entry.activities.map((activity) => (
+                    <Chip key={activity} color="primary" label={activity} sx={{ m: 0.5 }} />
+                  ))}
+                </Box>
+              </Box>
+            ) : ''}
+            <Box sx={{ m: 2 }} textAlign="right">
               <Button size="small">Edit</Button>
               <Button onClick={() => dispatch(removeEntry(entry))} size="small">Delete</Button>
             </Box>

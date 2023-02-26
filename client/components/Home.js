@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import MoodChart from './MoodChart';
@@ -10,24 +11,24 @@ function Home() {
   const { auth } = useSelector((state) => state);
 
   return (
-    <div>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid
         container
-        margin={4}
+        marginTop={4}
         direction="column"
         alignItems="center"
-        justify="center"
-        // spacing={4}
+        justifyContent="center"
+        spacing={2}
       >
-        <Typography color="text.primary" variant="h4">
-          {auth.firstName}
-          &apos;s Mood Chart
-        </Typography>
-        <Grid>
+        <Grid xs={8} textAlign="center">
+          <Typography gutterBottom color="text.primary" variant="h4">
+            {auth.firstName}
+            &apos;s Mood Chart
+          </Typography>
           <MoodChart />
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 }
 

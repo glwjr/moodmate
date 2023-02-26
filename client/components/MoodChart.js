@@ -20,6 +20,7 @@ export default function MoodChart() {
 
   const labels = data.map((mood) => mood.mood);
   const counts = data.map((mood) => mood.count);
+
   const chartData = {
     labels,
     datasets: [
@@ -51,5 +52,10 @@ export default function MoodChart() {
     ],
   };
 
-  return <Pie data={chartData} />;
+  const options = {
+    maintainAspectRatio: true,
+    responsive: true,
+  };
+
+  return <Pie data={chartData} options={options} />;
 }
