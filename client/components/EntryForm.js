@@ -9,8 +9,8 @@ import Stack from '@mui/material/Stack';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Chip from '@mui/material/Chip';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEntry, fetchActivities, fetchMoods } from '../store';
 
@@ -39,8 +39,9 @@ function EntryForm() {
     setEntry({ mood: '', note: '', activities: [] });
   };
 
-  const handleActivities = (event, selectedActivities) => {
-    setEntry({ ...entry, activities: selectedActivities });
+  const handleActivities = (event) => {
+    const { target: { value } } = event;
+    setEntry({ ...entry, activities: value });
   };
 
   return (
@@ -62,22 +63,33 @@ function EntryForm() {
                 </MenuItem>
               ))}
             </Select>
-            {/* <ToggleButtonGroup
-              size="small"
-              value={entry.activities}
-              onChange={handleActivities}
-              aria-label="Activity"
-            >
-              {activities.map((activity) => (
-                <ToggleButton
-                  key={activity.id}
-                  value={activity.name}
-                  aria-label={activity.name}
-                >
-                  {activity.name}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup> */}
+            <FormControl sx={{ m: 1 }}>
+              <InputLabel id="activities-multiple-chip-label">Activities</InputLabel>
+              <Select
+                labelId="activities-multiple-chip-label"
+                id="activities-multiple-chip"
+                multiple
+                value={entry.activities}
+                onChange={handleActivities}
+                input={<OutlinedInput id="select-multiple-chip" label="Activities" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+              >
+                {activities.map((activity) => (
+                  <MenuItem
+                    key={activity.id}
+                    value={activity.name}
+                  >
+                    {activity.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
               id="entry-note"
               label="Add a note"
